@@ -22,11 +22,19 @@ const retrievedContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts))
     },[contacts])
 
+    const handleDeleteContact =(id) =>{
+        const filteredContacts = contacts.filter((contact) =>{
+          return contact.id !== id
+        })
+
+        setContacts(filteredContacts)
+    }
+
   return (
       <React.Fragment>
       <Header />
       <ContactForm addContactHandler={addContactHandler}/>
-      <ContactList contacts={contacts}/>
+      <ContactList contacts={contacts} handleDeleteContact ={handleDeleteContact}/>
       </React.Fragment>
   );
 }

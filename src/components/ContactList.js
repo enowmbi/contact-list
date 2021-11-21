@@ -2,11 +2,12 @@ import React from 'react'
 import ContactEntry from './ContactEntry'
 
 const ContactList =(props) =>{
+
     const contacts = props.contacts
 
     const RenderContactEntries = contacts.map((contact) =>{
        return(
-         <ContactEntry key = {contact.id} id={contact.id} name={contact.name} email={contact.email}/>
+         <ContactEntry key = {contact.id} id = {contact.id} name = {contact.name} email = {contact.email} handleDeleteContact = {props.handleDeleteContact} />
        )
     })
 
