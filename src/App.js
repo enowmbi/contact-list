@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-import {Route, Routes, Link } from 'react-router-dom'
+import {Route, Routes, useNavigate } from 'react-router-dom'
 import Header from './components/Header'
 import AddContactForm from './components/AddContactForm'
 import EditContactForm from './components/EditContactForm'
@@ -9,13 +9,10 @@ function App(props) {
 
     const LOCAL_STORAGE_KEY = "contacts"
     const [contacts, setContacts] = useState([])
+    const navigate = useNavigate()
 
     const addContactHandler =(contact) =>{
         setContacts([...contacts, contact])
-    }
-
-    const updateContactHandler =(contact) =>{
-        console.log("in the main app update function", contact)
     }
 
     useEffect(() =>{
@@ -37,6 +34,7 @@ function App(props) {
     }
 
     const handleUpdateContact =(id) =>{
+        navigate("/edit")
         console.log("Contact to update:", id)
     }
 
@@ -55,7 +53,7 @@ function App(props) {
         <Route path='/edit' 
         element ={
             <EditContactForm
-            updateContactHandler = {updateContactHandler}
+            updateContactHandler = {handleUpdateContact}
             />
         }
         />

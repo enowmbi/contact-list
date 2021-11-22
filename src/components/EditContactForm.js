@@ -1,27 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const EditContactForm = (props) =>{
-    console.log("this is the props for edit form",props.contact)
- const [name, setName] = useState("")
- const [email, setEmail] = useState("")
+    const location = useLocation()
+    const navigate = useNavigate()
+    const [name, setName] = useState(location.state.name)
+    const [email, setEmail] = useState(location.state.email)
 
-    const handleSubmit =(event) =>{
-        props.UpdateContactHandler({id: Math.random(), name: name, email: email})
+    const handleUpdateSubmit =(event) =>{
+        console.log("handling submit",location.state)
         event.preventDefault()
-        setName("")
-        setEmail("")
+        navigate("/")
     }
 
-    useEffect(() =>{
-       setName("")
-    },[])
-
-    useEffect(() =>{
-       setEmail("")
-    },[])
-
     return(
-        <form onSubmit ={handleSubmit}>
+        <form onSubmit ={handleUpdateSubmit}>
         <div className ="container">
         <h2>Edit Contact</h2>
         <div className ="form-group">
