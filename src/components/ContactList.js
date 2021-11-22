@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ContactEntry from './ContactEntry'
+import SearchForm from './SearchForm'
 
 const ContactList =(props) =>{
 
@@ -19,6 +20,10 @@ const ContactList =(props) =>{
        )
     })
 
+    const handleSearch =(props) =>{
+     console.log("This is the search text", props)
+    }
+
     return(
         <div className="container">
         <div style={{marginTop: "10px"}} >
@@ -29,6 +34,7 @@ const ContactList =(props) =>{
         </Link>
         </div>
         <ul className="list-group list-group-flush">
+        <SearchForm handleSearch={handleSearch}/>
         { RenderContactEntries }
         </ul>
         </div>
