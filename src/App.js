@@ -1,4 +1,5 @@
 import React,{ useState, useEffect } from 'react'
+import {Route, Routes, Link } from 'react-router-dom'
 import Header from './components/Header'
 import AddContactForm from './components/AddContactForm'
 import EditContactForm from './components/EditContactForm'
@@ -14,22 +15,22 @@ function App(props) {
     }
 
     const updateContactHandler =(contact) =>{
-      console.log("in the main app update function", contact)
+        console.log("in the main app update function", contact)
     }
 
     useEffect(() =>{
-const retrievedContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+        const retrievedContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
         if(retrievedContacts)
-        setContacts(retrievedContacts)
+            setContacts(retrievedContacts)
     },[])
 
     useEffect(() =>{
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts))
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts))
     },[contacts])
 
     const handleDeleteContact =(id) =>{
         const filteredContacts = contacts.filter((contact) =>{
-          return contact.id !== id
+            return contact.id !== id
         })
 
         setContacts(filteredContacts)
@@ -39,24 +40,38 @@ const retrievedContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
         console.log("Contact to update:", id)
     }
 
-  return (
-      <React.Fragment>
-      <Header />
-      <AddContactForm
-      addContactHandler = {addContactHandler}
-      />
+    return (
+        <React.Fragment>
+        <Header />
+        <Routes>
+        <Route path="/add" 
+        element ={
+            <AddContactForm {...props}
+            addContactHandler = {addContactHandler}
+            />
+        }
+        />
 
-      <EditContactForm
-      updateContactHandler = {updateContactHandler}
-      />
+        <Route path='/edit' 
+        element ={
+            <EditContactForm {...props}
+            updateContactHandler = {updateContactHandler}
+            />
+        }
+        />
 
-      <ContactList
-      contacts={contacts}
-      handleDeleteContact = {handleDeleteContact}
-      handleUpdateContact = {handleUpdateContact}
-      />
-      </React.Fragment>
-  );
+        <Route path="/" 
+        element={
+            <ContactList {...props}
+            contacts={contacts}
+            handleDeleteContact = {handleDeleteContact}
+            handleUpdateContact = {handleUpdateContact}
+            />
+        }
+        />
+        </Routes>
+        </React.Fragment>
+    );
 }
 
 export default App;
