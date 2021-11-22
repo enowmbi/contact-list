@@ -46,7 +46,7 @@ function App(props) {
         <Routes>
         <Route path="/add" 
         element ={
-            <AddContactForm {...props}
+            <AddContactForm 
             addContactHandler = {addContactHandler}
             />
         }
@@ -54,7 +54,7 @@ function App(props) {
 
         <Route path='/edit' 
         element ={
-            <EditContactForm {...props}
+            <EditContactForm
             updateContactHandler = {updateContactHandler}
             />
         }
@@ -62,7 +62,7 @@ function App(props) {
 
         <Route path="/" 
         element={
-            <ContactList {...props}
+            <ContactList
             contacts={contacts}
             handleDeleteContact = {handleDeleteContact}
             handleUpdateContact = {handleUpdateContact}
