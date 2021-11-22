@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import { uuid } from 'uuidv4'
 
-const ContactForm = (props) =>{
+const AddContactForm = (props) =>{
  const [name, setName] = useState("")
  const [email, setEmail] = useState("")
 
     const handleSubmit =(event) =>{
-        props.addContactHandler({id: Math.random(), name: name, email: email})
+        props.addContactHandler({id: uuid(), name: name, email: email})
         event.preventDefault()
         setName("")
         setEmail("")
@@ -51,4 +52,4 @@ const ContactForm = (props) =>{
         </form>
     )
 }
-export default ContactForm
+export default AddContactForm

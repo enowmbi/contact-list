@@ -1,6 +1,7 @@
 import React,{ useState, useEffect } from 'react'
 import Header from './components/Header'
-import ContactForm from './components/ContactForm'
+import AddContactForm from './components/AddContactForm'
+import EditContactForm from './components/EditContactForm'
 import ContactList from './components/ContactList'
 
 function App(props) {
@@ -10,6 +11,10 @@ function App(props) {
 
     const addContactHandler =(contact) =>{
         setContacts([...contacts, contact])
+    }
+
+    const updateContactHandler =(contact) =>{
+      console.log("in the main app update function", contact)
     }
 
     useEffect(() =>{
@@ -30,11 +35,26 @@ const retrievedContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
         setContacts(filteredContacts)
     }
 
+    const handleUpdateContact =(id) =>{
+        console.log("Contact to update:", id)
+    }
+
   return (
       <React.Fragment>
       <Header />
-      <ContactForm addContactHandler={addContactHandler}/>
-      <ContactList contacts={contacts} handleDeleteContact ={handleDeleteContact}/>
+      <AddContactForm
+      addContactHandler = {addContactHandler}
+      />
+
+      <EditContactForm
+      updateContactHandler = {updateContactHandler}
+      />
+
+      <ContactList
+      contacts={contacts}
+      handleDeleteContact = {handleDeleteContact}
+      handleUpdateContact = {handleUpdateContact}
+      />
       </React.Fragment>
   );
 }
