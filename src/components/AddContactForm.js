@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { uuid } from 'uuidv4'
+import { useNavigate } from 'react-router-dom'
+import { v4 as uuid_v4} from 'uuid'
 
 const AddContactForm = (props) =>{
- const [name, setName] = useState("")
- const [email, setEmail] = useState("")
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+
+    const navigate = useNavigate()
 
     const handleSubmit =(event) =>{
-        props.addContactHandler({id: uuid(), name: name, email: email})
+        props.addContactHandler({id: uuid_v4(), name: name, email: email})
         event.preventDefault()
-        setName("")
-        setEmail("")
+        navigate("/")
     }
 
     useEffect(() =>{
