@@ -7,7 +7,14 @@ const ContactList =(props) =>{
 
     const RenderContactEntries = contacts.map((contact) =>{
        return(
-         <ContactEntry key = {contact.id} id = {contact.id} name = {contact.name} email = {contact.email} handleDeleteContact = {props.handleDeleteContact} />
+         <ContactEntry 
+           key = {contact.id} 
+           id = {contact.id} 
+           name = {contact.name} 
+           email = {contact.email} 
+           handleDeleteContact = {props.handleDeleteContact}
+           handleUpdateContact = {props.handleUpdateContact}
+           />
        )
     })
 
