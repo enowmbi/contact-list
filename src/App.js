@@ -1,5 +1,6 @@
 import React,{ useState, useEffect } from 'react'
 import {Route, Routes, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 import Header from './components/Header'
 import AddContactForm from './components/AddContactForm'
 import EditContactForm from './components/EditContactForm'
@@ -16,9 +17,12 @@ function App(props) {
     }
 
     useEffect(() =>{
-        const retrievedContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-        if(retrievedContacts)
-            setContacts(retrievedContacts)
+        // const retrievedContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+        axios.get("http://localhost:3006/api/v1/contacts").then((response) => {
+            setContacts(response.data)})
+
+        // if(retrievedContacts)
+            // setContacts(retrievedContacts)
     },[])
 
     useEffect(() =>{
