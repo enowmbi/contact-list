@@ -1,5 +1,5 @@
 import React,{ useState, useEffect } from 'react'
-import {Route, Routes, useNavigate } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Header from './components/Header'
 import AddContactForm from './components/AddContactForm'
@@ -8,12 +8,14 @@ import ContactList from './components/ContactList'
 
 function App(props) {
 
-    const LOCAL_STORAGE_KEY = "contacts"
+    // const LOCAL_STORAGE_KEY = "contacts"
     const [contacts, setContacts] = useState([])
     const navigate = useNavigate()
 
     const addContactHandler =(contact) =>{
-        setContacts([...contacts, contact])
+        axios.post("http://localhost:3006/api/v1/contacts", contact).then((response) =>{
+            setContacts(...contacts, response.data)
+        })
     }
 
     useEffect(() =>{
@@ -24,10 +26,6 @@ function App(props) {
         // if(retrievedContacts)
             // setContacts(retrievedContacts)
     },[])
-
-    useEffect(() =>{
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts))
-    },[contacts])
 
     const handleDeleteContact =(id) =>{
         const filteredContacts = contacts.filter((contact) =>{

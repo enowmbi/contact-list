@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { v4 as uuid_v4} from 'uuid'
+// import { v4 as uuid_v4} from 'uuid'
 
 const AddContactForm = (props) =>{
     const [name, setName] = useState("")
@@ -9,7 +9,8 @@ const AddContactForm = (props) =>{
     const navigate = useNavigate()
 
     const handleSubmit =(event) =>{
-        props.addContactHandler({id: uuid_v4(), name: name, email: email})
+        // props.addContactHandler({id: uuid_v4(), name: name, email: email})
+        props.addContactHandler({ name: name, email: email })
         event.preventDefault()
         navigate("/")
     }
